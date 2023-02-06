@@ -11,8 +11,6 @@ export class UserViewModel {
       numero: user.numero,
       cidade: user.cidade,
       uf: user.uf,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
     };
   }
 }

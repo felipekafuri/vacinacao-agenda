@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id              String    @id @default(uuid())
+  id              String     @id @default(uuid())
   nome            String?
   data_nascimento DateTime?
   sexo            String?
@@ -20,6 +20,16 @@ model User {
   setor           String?
   cidade          String?
   uf              String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  alergias        Alergias[]
+}
+
+model Alergias {
+  id        String   @id @default(uuid())
+  nome      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String?
+  User      User?    @relation(fields: [userId], references: [id])
 }
