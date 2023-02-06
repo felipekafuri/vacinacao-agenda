@@ -23,13 +23,38 @@ model User {
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
   alergias        Alergias[]
+  Agendas         Agendas[]
 }
 
 model Alergias {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   nome      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   userId    String?
-  User      User?    @relation(fields: [userId], references: [id])
+  User      User?     @relation(fields: [userId], references: [id])
+  Agendas   Agendas[]
+}
+
+model Agendas {
+  id        String    @id @default(uuid())
+  data      DateTime?
+  status    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  vacinaId  String?
+  userId    String?
+  User      User?     @relation(fields: [userId], references: [id])
+  alergiaId String?
+  Alergias  Alergias? @relation(fields: [alergiaId], references: [id])
+  Vacinas   Vacinas?  @relation(fields: [vacinaId], references: [id])
+}
+
+model Vacinas {
+  id            String    @id @default(uuid())
+  nome          String?
+  periodicidade String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  Agendas       Agendas[]
 }

@@ -8,6 +8,18 @@ import { PrismaService } from '../prisma.service';
 @Injectable()
 export class PrismaAlergiasRepositories implements AlergiasRepository {
   constructor(private prismaService: PrismaService) {}
+  async findById(vacinaId: string): Promise<Alergia | null> {
+    const alergia = await this.prismaService.alergias.findUnique({
+      where: {
+        id: vacinaId,
+      },
+    });
+
+    if (!alergia) null;
+
+    return PrismaAlergiaMapper.toDomain(alergia);
+  }
+
   async save(alergias: Alergia): Promise<Alergia> {
     const alergia = await this.prismaService.alergias.create({
       data: {

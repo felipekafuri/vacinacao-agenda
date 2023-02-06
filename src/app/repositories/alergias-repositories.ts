@@ -8,4 +8,5 @@ export abstract class AlergiasRepository {
     alergiaNome: string,
   ): Promise<Alergia | undefined>;
   abstract getAll(): Promise<AlergiaUser[]>;
+  abstract findById(id: string): Promise<Alergia | null>;
 }
