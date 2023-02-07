@@ -7,4 +7,7 @@ export abstract class AgendasRepository {
     data: Date,
   ): Promise<Agenda | undefined>;
   abstract getAll(status?: string): Promise<Agenda[]>;
+  abstract findById(id: string): Promise<Agenda | undefined>;
+  abstract update(agendaId, agenda: Agenda): Promise<Agenda>;
+  abstract delete(id: string): Promise<void>;
 }

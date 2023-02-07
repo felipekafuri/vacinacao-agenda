@@ -9,4 +9,5 @@ export abstract class AlergiasRepository {
   ): Promise<Alergia | undefined>;
   abstract getAll(): Promise<AlergiaUser[]>;
   abstract findById(id: string): Promise<Alergia | null>;
+  abstract delete(id: string): Promise<void>;
 }

@@ -8,10 +8,17 @@ import { PrismaService } from '../prisma.service';
 @Injectable()
 export class PrismaAlergiasRepositories implements AlergiasRepository {
   constructor(private prismaService: PrismaService) {}
-  async findById(vacinaId: string): Promise<Alergia | null> {
+  async delete(id: string): Promise<void> {
+    await this.prismaService.alergias.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
+  async findById(id: string): Promise<Alergia | null> {
     const alergia = await this.prismaService.alergias.findUnique({
       where: {
-        id: vacinaId,
+        id,
       },
     });
 

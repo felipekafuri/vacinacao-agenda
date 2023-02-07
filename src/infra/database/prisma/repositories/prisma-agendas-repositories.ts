@@ -7,6 +7,39 @@ import { PrismaService } from '../prisma.service';
 @Injectable()
 export class PrismaAgendasRepository implements AgendasRepository {
   constructor(private prismaService: PrismaService) {}
+  async delete(id: string): Promise<void> {
+    await this.prismaService.agendas.delete({
+      where: {
+        id,
+      },
+    });
+  }
+  async update(agendaId, agenda: Agenda): Promise<Agenda> {
+    const { status } = agenda;
+
+    const a = await this.prismaService.agendas.update({
+      where: {
+        id: agendaId,
+      },
+      data: {
+        status,
+      },
+    });
+
+    return PrismaAgendaMapper.toDomain(a);
+  }
+  async findById(id: string): Promise<Agenda | undefined> {
+    const agenda = await this.prismaService.agendas.findFirst({
+      where: {
+        id,
+      },
+    });
+    if (!agenda) {
+      return undefined;
+    }
+
+    return PrismaAgendaMapper.toDomain(agenda);
+  }
 
   async save(agenda: Agenda): Promise<Agenda> {
     const { id, data, userId, status, alergiaId, vacinaId } = agenda;
