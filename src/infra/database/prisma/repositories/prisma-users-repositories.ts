@@ -7,7 +7,7 @@ import { PrismaService } from '../prisma.service';
 @Injectable()
 export class PrismaUsersRepository implements UserRepository {
   constructor(private prismaService: PrismaService) {}
-  async findById(user_id: string): Promise<User | null> {
+  async findById(user_id: string): Promise<any | null> {
     const user = await this.prismaService.user.findUnique({
       where: {
         id: user_id,
@@ -37,7 +37,7 @@ export class PrismaUsersRepository implements UserRepository {
     name: string,
     number: string,
     birthDate: Date,
-  ): Promise<User | null> {
+  ): Promise<any | null> {
     const user = await this.prismaService.user.findFirst({
       where: {
         nome: name,
@@ -51,8 +51,9 @@ export class PrismaUsersRepository implements UserRepository {
     return PrismaUserMapper.toDomain(user);
   }
 
-  async getAll(): Promise<User[]> {
+  async getAll(): Promise<any[]> {
     const users = await this.prismaService.user.findMany();
+    console.log(users);
 
     return users.map((u) => PrismaUserMapper.toDomain(u));
   }

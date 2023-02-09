@@ -22,6 +22,7 @@ export class PrismaAlergiaMapper {
   static toDomainUser(raw: RawAlergia, user_name: string) {
     const alergia = new Alergia(
       {
+        id: raw.id,
         nome: raw.nome,
         userId: raw.userId,
       },
@@ -29,7 +30,7 @@ export class PrismaAlergiaMapper {
     );
     return {
       nome: alergia.nome,
-      id: alergia.id,
+      id: raw.id,
       user_name,
     };
   }

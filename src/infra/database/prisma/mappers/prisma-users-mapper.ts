@@ -18,17 +18,6 @@ export class PrismaUserMapper {
   }
 
   static toDomain(raw: RawUser) {
-    return new User({
-      nome: raw.nome,
-      data_nascimento: raw.data_nascimento,
-      sexo: raw.sexo,
-      logradouro: raw.logradouro,
-      numero: raw.numero,
-      cidade: raw.cidade,
-      uf: raw.uf,
-      createdAt: raw.createdAt,
-      updatedAt: raw.updatedAt,
-      id: raw.id,
-    });
+    return raw;
   }
 }
